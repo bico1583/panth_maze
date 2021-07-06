@@ -1,1 +1,0 @@
-# panth_maze
