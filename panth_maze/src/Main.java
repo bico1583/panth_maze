@@ -29,8 +29,16 @@ S start
 
     public static void main(String[] args) throws FileNotFoundException {
        // Position p = new Position(0, 3); stara fixna poloha startu zmenena na dynamicku ↓ cyklom
-        char [][] m = MazeFileLoader();
-        System.out.println(m);
+        System.out.println("Load maze from file(0) or manually(1)?");
+        char [][] m;
+        Scanner sc = new Scanner(System.in);
+        int menu = sc.nextInt();
+        if(menu == 1){
+            m = MazeStdInLoader();
+        }
+        else{
+             m = MazeFileLoader();
+        }
         /*
         na vypis suborov v adresari
         File file = new File("./src");
@@ -53,7 +61,7 @@ S start
             int y = path.peek().y;
             m [y][x] = '#';
 
-            if (isValid(y + 1, x)){
+            if (isValid(y + 1, x, m)){
                 //dolu
                 if (m[y + 1][x] == 'X'){
                     System.out.println("d, GG EZ");
@@ -66,7 +74,7 @@ S start
                 }
             }
 
-            if (isValid(y - 1, x)){
+            if (isValid(y - 1, x, m)){
                 //hore
                 if (m[y - 1][x] == 'X'){
                     System.out.println("u, GG EZ");
@@ -81,7 +89,7 @@ S start
 
 
 
-            if (isValid(y, x + 1)){
+            if (isValid(y, x + 1, m)){
                 //vpravo
                 if (m[y][x + 1] == 'X'){
                     System.out.println("r, GG EZ");
@@ -94,7 +102,7 @@ S start
                 }
             }
 
-            if (isValid(y, x - 1)){
+            if (isValid(y, x - 1, m)){
                 //vlavo
                 if (m[y][x - 1] == 'X'){
                     System.out.println("l, GG EZ");
@@ -115,8 +123,25 @@ S start
         }
     }
 
-    public static boolean isValid(int y, int x) throws FileNotFoundException {
-        char [][] m = MazeFileLoader();
+    private static char[][] MazeStdInLoader() {
+        System.out.println("Enter number of rows and columns: ");
+        Scanner sc = new Scanner(System.in);
+        int rows = sc.nextInt();
+        int columns = sc.nextInt();
+        System.out.println("Enter maze: ");
+        char[][] maze = new char[rows][columns];
+        for(int i=0; i<rows;i++)
+        {
+            for(int j=0; j<columns;j++)
+            {
+                maze[i][j] = sc.next().charAt(0);
+            }
+        }
+        System.out.println(Arrays.deepToString(maze));
+        return maze;
+    }
+
+    public static boolean isValid(int y, int x, char[][]m) throws FileNotFoundException {
         if (y < 0 || y >= m.length || x < 0 || x >= m[y].length){
             return false;
         }
