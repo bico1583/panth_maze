@@ -4,13 +4,18 @@ import java.util.LinkedList;
 public class Main {
 
         static int [][] maze = {
-                {2, 0, 1, 3},
-                {1, 1, 0, 1},
-                {0, 1, 1, 1}  };
-/*2 koniec
-1 cesta
-0 prekazka
-3 start
+                {'X', '#', '.', 'S'},
+                {'.', '#', '.', '.'},
+                {'.', '.', '.', '#'},
+                {'.', '#', '.', '.'},
+                {'.', '#', '.', '.'},
+                {'.', '.', '.', '#'}};
+
+
+/*X koniec
+. cesta
+# prekazka
+S start
  */
       static LinkedList<Position> path = new LinkedList<Position>();
 
@@ -31,11 +36,11 @@ public class Main {
 
             if (isValid(y + 1, x)){
                 //dolu
-                if (maze[y + 1][x] == 2){
+                if (maze[y + 1][x] == 'X'){
                     System.out.println("d, GG EZ");
                     return;
                 }
-                else if (maze[y + 1][x] == 1){
+                else if (maze[y + 1][x] == '.'){
                     path.push(new Position(y + 1, x));
                     System.out.println("d, ");
                     continue;
@@ -44,11 +49,11 @@ public class Main {
 
             if (isValid(y - 1, x)){
                 //hore
-                if (maze[y - 1][x] == 2){
+                if (maze[y - 1][x] == 'X'){
                     System.out.println("u, GG EZ");
                     return;
                 }
-                else if (maze[y - 1][x] == 1){
+                else if (maze[y - 1][x] == '.'){
                     path.push(new Position(y - 1, x));
                     System.out.println("u, ");
                     continue;
@@ -59,11 +64,11 @@ public class Main {
 
             if (isValid(y, x + 1)){
                 //vpravo
-                if (maze[y][x + 1] == 2){
+                if (maze[y][x + 1] == 'X'){
                     System.out.println("r, GG EZ");
                     return;
                 }
-                else if (maze[y][x + 1] == 1){
+                else if (maze[y][x + 1] == '.'){
                     path.push(new Position(y, x + 1));
                     System.out.println("r, ");
                     continue;
@@ -72,16 +77,17 @@ public class Main {
 
             if (isValid(y, x - 1)){
                 //vlavo
-                if (maze[y][x - 1] == 2){
+                if (maze[y][x - 1] == 'X'){
                     System.out.println("l, GG EZ");
                     return;
                 }
-                else if (maze[y][x - 1] == 1){
+                else if (maze[y][x - 1] == '.'){
                     path.push(new Position(y, x - 1));
                     System.out.println("l, ");
                     continue;
                 }
                 path.pop();
+                System.out.println("b, ");
                 if (path.size() <= 0){
                     System.out.println("Nuh uh");
                     return;
