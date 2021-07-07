@@ -1,23 +1,14 @@
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
-/*
-        static int [][] maze = {
-                {'X', '#', '.', '.'},
-                {'.', '#', '.', '.'},
-                {'.', '.', '.', '#'},
-                {'.', '#', '.', '.'},
-                {'.', '#', '.', 'S'},
-                {'.', '.', '.', '#'}};
 
-*/
 /*X koniec
 . cesta
 # prekazka
@@ -64,7 +55,7 @@ S start
             if (isValid(y + 1, x, m)){
                 //dolu
                 if (m[y + 1][x] == 'X'){
-                    System.out.println("d, GG EZ");
+                    System.out.println("d, X FOUND");
                     return;
                 }
                 else if (m[y + 1][x] == '.'){
@@ -77,7 +68,7 @@ S start
             if (isValid(y - 1, x, m)){
                 //hore
                 if (m[y - 1][x] == 'X'){
-                    System.out.println("u, GG EZ");
+                    System.out.println("u, X FOUND");
                     return;
                 }
                 else if (m[y - 1][x] == '.'){
@@ -92,7 +83,7 @@ S start
             if (isValid(y, x + 1, m)){
                 //vpravo
                 if (m[y][x + 1] == 'X'){
-                    System.out.println("r, GG EZ");
+                    System.out.println("r, X FOUND");
                     return;
                 }
                 else if (m[y][x + 1] == '.'){
@@ -105,7 +96,7 @@ S start
             if (isValid(y, x - 1, m)){
                 //vlavo
                 if (m[y][x - 1] == 'X'){
-                    System.out.println("l, GG EZ");
+                    System.out.println("l, X FOUND");
                     return;
                 }
                 else if (m[y][x - 1] == '.'){
@@ -116,14 +107,23 @@ S start
                 path.pop();
                 System.out.println("b, ");
                 if (path.size() <= 0){
-                    System.out.println("Nuh uh");
+                    System.out.println("Error");
                     return;
                 }
             }
         }
     }
 
-    private static char[][] MazeStdInLoader() {
+    public static void p(){
+       String p = "";
+       Iterator<Integer> iterator = path.iterator();
+        while(iterator.hasNext()){
+            p = p + iterator.next() + " ";
+        }
+        System.out.println(p);
+    }
+
+    public static char[][] MazeStdInLoader() {
         System.out.println("Enter number of rows and columns: ");
         Scanner sc = new Scanner(System.in);
         int rows = sc.nextInt();
