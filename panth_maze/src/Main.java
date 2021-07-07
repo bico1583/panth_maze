@@ -4,11 +4,11 @@ import java.util.LinkedList;
 public class Main {
 
         static int [][] maze = {
-                {'X', '#', '.', 'S'},
+                {'X', '#', '.', '.'},
                 {'.', '#', '.', '.'},
                 {'.', '.', '.', '#'},
                 {'.', '#', '.', '.'},
-                {'.', '#', '.', '.'},
+                {'.', '#', '.', 'S'},
                 {'.', '.', '.', '#'}};
 
 
@@ -22,17 +22,24 @@ S start
 
 
     public static void main(String[] args) {
-        Position p = new Position(0, 3);
-
-
-        path.push(p);
+       // Position p = new Position(0, 3); stara fixna poloha startu zmenena na dynamicku ↓ cyklom
+        int i, j;
+        for (i = 0; i < maze.length; i++){
+            for (j = 0; j < maze[i].length; j++){
+                if(maze[i][j] == 'S'){
+                    Position p = new Position(i,j);
+                    System.out.println("start found on: " + i + " " + j);
+                    path.push(p);
+                }
+            }
+        }
 
         // sout na vypisanie pozicie v liste System.out.println(maze [path.peek().y][path.peek().x]);
 
         while (true){
             int x = path.peek().x;
             int y = path.peek().y;
-            maze [y][x] = 0;
+            maze [y][x] = '#';
 
             if (isValid(y + 1, x)){
                 //dolu
