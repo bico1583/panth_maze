@@ -3,7 +3,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -30,11 +29,14 @@ S start
         else{
              m = MazeFileLoader();
         }
-        /*
-        na vypis suborov v adresari
-        File file = new File("./src");
-        for(String fileNames : file.list()) System.out.println(fileNames);*/
+        movement(m);
+
+
+    }
+
+    public static String movement(char [] [] m) throws FileNotFoundException {
         int i, j;
+        String pa = "";
         for (i = 0; i < m.length; i++){
             for (j = 0; j < m[i].length; j++){
                 if(m[i][j] == 'S'){
@@ -55,12 +57,15 @@ S start
             if (isValid(y + 1, x, m)){
                 //dolu
                 if (m[y + 1][x] == 'X'){
-                    System.out.println("d, X FOUND");
-                    return;
+                    //System.out.println("d, X FOUND");
+                    pa += "d ";
+                    System.out.println(pa);
+                    return pa;
                 }
                 else if (m[y + 1][x] == '.'){
                     path.push(new Position(y + 1, x));
-                    System.out.println("d, ");
+                    //System.out.println("d, ");
+                    pa += "d ";
                     continue;
                 }
             }
@@ -68,12 +73,15 @@ S start
             if (isValid(y - 1, x, m)){
                 //hore
                 if (m[y - 1][x] == 'X'){
-                    System.out.println("u, X FOUND");
-                    return;
+                    //System.out.println("u, X FOUND");
+                    pa += "u ";
+                    System.out.println(pa);
+                    return pa;
                 }
                 else if (m[y - 1][x] == '.'){
                     path.push(new Position(y - 1, x));
-                    System.out.println("u, ");
+                    // System.out.println("u, ");
+                    pa += "u ";
                     continue;
                 }
             }
@@ -83,12 +91,15 @@ S start
             if (isValid(y, x + 1, m)){
                 //vpravo
                 if (m[y][x + 1] == 'X'){
-                    System.out.println("r, X FOUND");
-                    return;
+                    // System.out.println("r, X FOUND");
+                    pa += "r ";
+                    System.out.println(pa);
+                    return pa;
                 }
                 else if (m[y][x + 1] == '.'){
                     path.push(new Position(y, x + 1));
-                    System.out.println("r, ");
+                    // System.out.println("r, ");
+                    pa += "r ";
                     continue;
                 }
             }
@@ -96,31 +107,26 @@ S start
             if (isValid(y, x - 1, m)){
                 //vlavo
                 if (m[y][x - 1] == 'X'){
-                    System.out.println("l, X FOUND");
-                    return;
+                    //  System.out.println("l, X FOUND");
+                    pa += "l ";
+                    System.out.println(pa);
+                    return pa;
                 }
                 else if (m[y][x - 1] == '.'){
                     path.push(new Position(y, x - 1));
-                    System.out.println("l, ");
+                    //  System.out.println("l, ");
+                    pa += "l ";
                     continue;
                 }
                 path.pop();
-                System.out.println("b, ");
+                //  System.out.println("b, ");
                 if (path.size() <= 0){
                     System.out.println("Error");
-                    return;
+                    return pa;
                 }
             }
         }
-    }
 
-    public static void p(){
-       String p = "";
-       Iterator<Integer> iterator = path.iterator();
-        while(iterator.hasNext()){
-            p = p + iterator.next() + " ";
-        }
-        System.out.println(p);
     }
 
     public static char[][] MazeStdInLoader() {

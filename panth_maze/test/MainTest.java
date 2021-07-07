@@ -10,10 +10,13 @@ class MainTest {
   static  char [][] maze = {
             {'X', '#',},
             {'.', 'S'}};
-    @Test
+  @RepeatedTest(5)
     @DisplayName("Test of the path.")
-    void path() {
-
+    void movementTest() throws FileNotFoundException {
+        char [][] maze = {
+              {'X', '#',},
+              {'.', 'S'}};
+      assertEquals(Main.movement(maze), "l u ");
     }
 
     @RepeatedTest(3)
