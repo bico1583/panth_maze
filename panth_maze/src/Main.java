@@ -1,5 +1,11 @@
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Main {
 
@@ -21,8 +27,13 @@ S start
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
        // Position p = new Position(0, 3); stara fixna poloha startu zmenena na dynamicku ↓ cyklom
+        char [][] m = MazeFileLoader();
+        /*
+        na vypis suborov v adresari
+        File file = new File("./src");
+        for(String fileNames : file.list()) System.out.println(fileNames);*/
         int i, j;
         for (i = 0; i < maze.length; i++){
             for (j = 0; j < maze[i].length; j++){
@@ -109,5 +120,28 @@ S start
         }
 
         return true;
+    }
+
+    public static char[][] MazeFileLoader() throws FileNotFoundException {
+        Scanner sc = new Scanner(new BufferedReader(new FileReader("./src/input.txt")));
+        int rows = 14;
+        int columns = 35;
+        char[][] maze = new char[rows][columns];
+        char [] pole = new char[rows];
+        while (sc.hasNextLine()) {
+           for (int i = 0; i < maze.length; i++) {
+               pole = sc.nextLine().toCharArray();
+
+               /*  String[] line = sc.nextLine().trim().split(" ");
+                pole[i] = line[0].charAt(i);*/
+                for (int j = 0; j < columns; j++) {
+                    maze[i] = pole;
+                }
+            }
+        }
+        System.out.println(pole);
+        System.out.println(Arrays.deepToString(maze));
+        return maze;
+
     }
 }
