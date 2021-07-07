@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
-
+/*
         static int [][] maze = {
                 {'X', '#', '.', '.'},
                 {'.', '#', '.', '.'},
@@ -17,7 +17,7 @@ public class Main {
                 {'.', '#', '.', 'S'},
                 {'.', '.', '.', '#'}};
 
-
+*/
 /*X koniec
 . cesta
 # prekazka
@@ -30,14 +30,15 @@ S start
     public static void main(String[] args) throws FileNotFoundException {
        // Position p = new Position(0, 3); stara fixna poloha startu zmenena na dynamicku ↓ cyklom
         char [][] m = MazeFileLoader();
+        System.out.println(m);
         /*
         na vypis suborov v adresari
         File file = new File("./src");
         for(String fileNames : file.list()) System.out.println(fileNames);*/
         int i, j;
-        for (i = 0; i < maze.length; i++){
-            for (j = 0; j < maze[i].length; j++){
-                if(maze[i][j] == 'S'){
+        for (i = 0; i < m.length; i++){
+            for (j = 0; j < m[i].length; j++){
+                if(m[i][j] == 'S'){
                     Position p = new Position(i,j);
                     System.out.println("start found on: " + i + " " + j);
                     path.push(p);
@@ -50,15 +51,15 @@ S start
         while (true){
             int x = path.peek().x;
             int y = path.peek().y;
-            maze [y][x] = '#';
+            m [y][x] = '#';
 
             if (isValid(y + 1, x)){
                 //dolu
-                if (maze[y + 1][x] == 'X'){
+                if (m[y + 1][x] == 'X'){
                     System.out.println("d, GG EZ");
                     return;
                 }
-                else if (maze[y + 1][x] == '.'){
+                else if (m[y + 1][x] == '.'){
                     path.push(new Position(y + 1, x));
                     System.out.println("d, ");
                     continue;
@@ -67,11 +68,11 @@ S start
 
             if (isValid(y - 1, x)){
                 //hore
-                if (maze[y - 1][x] == 'X'){
+                if (m[y - 1][x] == 'X'){
                     System.out.println("u, GG EZ");
                     return;
                 }
-                else if (maze[y - 1][x] == '.'){
+                else if (m[y - 1][x] == '.'){
                     path.push(new Position(y - 1, x));
                     System.out.println("u, ");
                     continue;
@@ -82,11 +83,11 @@ S start
 
             if (isValid(y, x + 1)){
                 //vpravo
-                if (maze[y][x + 1] == 'X'){
+                if (m[y][x + 1] == 'X'){
                     System.out.println("r, GG EZ");
                     return;
                 }
-                else if (maze[y][x + 1] == '.'){
+                else if (m[y][x + 1] == '.'){
                     path.push(new Position(y, x + 1));
                     System.out.println("r, ");
                     continue;
@@ -95,11 +96,11 @@ S start
 
             if (isValid(y, x - 1)){
                 //vlavo
-                if (maze[y][x - 1] == 'X'){
+                if (m[y][x - 1] == 'X'){
                     System.out.println("l, GG EZ");
                     return;
                 }
-                else if (maze[y][x - 1] == '.'){
+                else if (m[y][x - 1] == '.'){
                     path.push(new Position(y, x - 1));
                     System.out.println("l, ");
                     continue;
@@ -114,8 +115,9 @@ S start
         }
     }
 
-    public static boolean isValid(int y, int x){
-        if (y < 0 || y >= maze.length || x < 0 || x >= maze[y].length){
+    public static boolean isValid(int y, int x) throws FileNotFoundException {
+        char [][] m = MazeFileLoader();
+        if (y < 0 || y >= m.length || x < 0 || x >= m[y].length){
             return false;
         }
 
@@ -139,8 +141,8 @@ S start
                 }
             }
         }
-        System.out.println(pole);
-        System.out.println(Arrays.deepToString(maze));
+      /*  System.out.println(pole);
+        System.out.println(Arrays.deepToString(maze));*/
         return maze;
 
     }
